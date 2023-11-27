@@ -1,0 +1,88 @@
+% sections/section1.tex
+
+\section{线性回归算法}
+
+
+\subsection{简介}
+
+
+\subsection{定义和数学方法}
+
+\textbf{对于两个自变量的线性回归：}
+\[Y = X_1 \theta_1 + X_2 \theta_2\]
+
+\textbf{拟合的平面：}
+\[h_\theta (x_1, x_2) = \theta_0 + \theta_1 x_1 + \theta x_2 \]
+
+\textbf{一般性整合：}
+\[h_\theta (\mathbf{x}) = \sum_{i = 1}^{n} \theta_i x_i =  \mathbf{\theta}^T \mathbf{x}\]
+
+\textbf{误差（概率论基础）：} 
+\begin{itemize}
+    \item 真实值和预测值之间的差异，一般记作 \(\varepsilon \)
+    \item 对于每个样本，预测和误差： \(y^{(i)} = \theta^T x^{(i)} + \varepsilon^{(i)}\)
+    \item 误差服从高斯分布：
+    \[p(\varepsilon^{(i)}) = \frac{1}{\sqrt[]{2 \pi}\sigma} e^{-\frac{(\varepsilon^{(i)})^2}{2 \sigma^2}} \]
+    \item 似然函数：
+    \[ L(\theta) =  \prod_{i=1}^{m} p(y^{(i)}| x^{(i)};\theta)  \]
+    \item 对数似然函数：
+    \[ \log L(\theta)\]   
+\end{itemize}
+
+\textbf{对于对数似然函数展开化简：}
+
+$$\sum_{i=1}^{m}\log\frac{1}{\sqrt[1]{2\pi}}\exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})= m \log\frac{1}{\sqrt[]{2\pi}\sigma } - \frac{1}{\sigma^2}\cdot \frac{1}{2}\sum_{i=1}^{m}(y^{(i)}-\theta^T x^{(i)})^2 $$
+
+\textbf{目标函数}
+\begin{align*}
+    J\big(\theta\big) & ={\frac{1}{2}}\sum_{i=1}^{m}(y^{(i)}-\theta^{T}x^{(i)})^{2}\\
+    & ={\frac{1}{2}}\sum_{i=1}^{m}{\Big(}h_{\theta}{\big(}x^{(i)}{\big)}-y^{(i)}{\Big)}^{2}={\frac{1}{2}}{\big(}X\theta-y{\big)}^{T}{\big(}X\theta-y{\big)}\\
+\end{align*} 
+
+\textbf{求相应的参数}
+$$\theta_{val} = argmin J(\theta)$$
+\begin{align*}
+    \nabla_{\theta}J(\theta) &= \nabla_{\theta}\Bigl({\frac{1}{2}}(X\theta-y)^{T}(X\theta-y)\Bigr) \\
+    &= \nabla_{\theta}\Bigl({\frac{1}{2}}\Bigl(\theta^{T}X^{T}-y^{T}\Bigr)(X\theta-y)\Bigr) \\
+    &= {\frac{1}{2}}\nabla_{\theta}\Bigl(\theta^{T}X^{T}X\theta-\theta^{T}X^{T}y-y^{T}X\theta+y^{T}y\Bigr) \\
+    &= {\frac{1}{2}}\Bigl(2X^{T}X\theta-X^{T}y-\bigl(y^{T}X\bigr)^{T}\Bigr) \\
+    &= X^{T}X\theta-y^{T}y
+\end{align*}
+令导数等于0, \qquad 则有 $\theta = (X^{T}X)^{-1} X^T y$
+
+\subsection{优化算法--梯度下降法}
+
+\textbf{引入：}得到一个目标函数后，如何进行求解？
+
+直接求解？（并不一定可解，线性回归是一个有公式的特例）
+
+\textbf{如何优化参数？}
+
+
+
+\textbf{目标函数：}
+$$J\big(\theta\big) = {\frac{1}{2m}}\sum_{i=1}^{m}{\Big(}h_{\theta}{\big(}x^{(i)}{\big)}-y^{(i)}{\Big)}^{2}$$
+
+\textbf{学习率(LR):}对结果会产生巨大的影响，一般需要小一些
+
+\textbf{批处理数量（batch）：}32,64,128都可以
+
+\begin{itemize}
+    \item 批量梯度下降(GD)：$$\frac{\partial J(\theta)}{\partial \theta_{j}}=-\frac{1}{m}\sum_{i=1}^{m}(y^{i}-h_{\theta}(x^{i}))x_{j}^{i}\qquad \theta_{j}^{\;'}=\theta_{j}+\frac{1}{m}\sum_{i=1}^{m}(y^{i}-h_{\theta}(x^{i}))x_{j}^{i}$$  \newline 容易得到最优解，但是速度慢
+    \item 随机梯度下降(SGD)：$${\theta}_{j}^{'}=\theta_{j}+(y^{i}-h_{\theta}(x^{i}))x^{i}_{j}$$ \newline 迭代速度快，但是不一定每次都朝着收敛的方向
+    \item 小批量梯度下降：$$\theta_{j}:=\theta_{j}-\alpha{\frac{1}{10}}\sum_{k=i}^{i+9}(h_{\theta}(x^{(k)})-y^{(k)})x_{j}^{(k)}$$ \newline  每次更新选择一小部分数据来算，比较实用！
+\end{itemize}
+
+
+
+
+
+
+
+
+% 添加更多的子节和内容...
+
+\subsection{总结}
+
+
+

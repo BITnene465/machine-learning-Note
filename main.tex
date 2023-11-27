@@ -1,0 +1,44 @@
+\documentclass{article}
+
+% 导言区
+\usepackage{datetime2} % 点号分隔的日期格式支持
+\usepackage{ctex}     % 中文支持
+\usepackage{amsmath}  % 数学公式支持
+\usepackage{amsfonts} % 数学字体支持
+\usepackage{amssymb}  % 数学符号支持
+\usepackage{graphicx} % 用于插入图片
+\usepackage{lipsum}   % 用于生成一些无意义的文本，可以删除
+
+% 设置标题信息
+\title{Machine Learning Algorithm}
+\author{BitNene}
+\date{11.27, 2023}
+
+
+% 文档内容
+\begin{document}
+
+\maketitle % 生成标题
+
+\begin{abstract}
+% 这是你文档的摘要。
+\end{abstract}
+
+\tableofcontents % 自动生成目录
+
+% 以下是你的正文内容，可以根据需要添加section
+\section{引言}
+
+
+
+% 在章节中使用 \input 命令引入各个章节的文件
+\input{sections/section1.tex}
+
+\input{sections/section2.tex}
+
+
+% 添加更多section...
+
+
+
+\end{document}
